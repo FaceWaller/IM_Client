@@ -9,3 +9,4 @@ edition = "2021"
 database = { path = '../database'}
 mqtt = { path = '../mqtt'}
 rumqttc = "0.22.0"
+thiserror = "1.0.47"

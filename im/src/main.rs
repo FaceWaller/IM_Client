@@ -9,18 +9,6 @@ fn main() {
     let port = 1883;
     let topic = "rumqtt".to_string();
 
-    if let Some(current_path) = env::current_dir().unwrap().to_str() {
-        let db_path = format!("{}/db", current_path);
-        match get_connection(db_path.as_str()) {
-            Ok(_) => {
-                println!("数据库连接成功 {:?}", db_path);
-            }
-            Err(e) => {
-                println!("数据库连接失败 {}",e);
-            }
-        }
-    }
-
 
     // let notify = |i: usize , notify: Result<Event, rumqttc::ConnectionError> | {
     //     if let Some(eve) = notify.ok() {

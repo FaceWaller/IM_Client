@@ -19,7 +19,7 @@ pub trait PragmaExtension: ConnectionExtension {
             Some(schema) => format!("PRAGMA {}.{} = '{}'", schema, key, val),
             None => format!("PRAGMA {} = '{}'", key, val),
         };
-        self.exec(&query).map_err(|err| as_database_error(err.to_string()))?;
+        self.exec(&query).map_err(as_database_error)?;
         Ok(())
     }
 

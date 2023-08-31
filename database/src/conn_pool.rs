@@ -89,11 +89,11 @@ impl ManageConnection for ConnectionManager {
     type Connection = SqliteConnection;
     type Error = DataBaseError;
     fn connect(&self) -> DataBaseResult<Self::Connection> {
-        Ok(SqliteConnection::establish(&self.db_uri).map_err(|err| as_database_error(err.to_string()))? )
+        Ok(SqliteConnection::establish(&self.db_uri).map_err(as_database_error)? )
     }
 
     fn is_valid(&self, conn: &mut Self::Connection) -> DataBaseResult<()> {
-        Ok(conn.execute("SELECT 1").map(|_| ()).map_err(|err| as_database_error(err.to_string()))?)
+        Ok(conn.execute("SELECT 1").map(|_| ()).map_err(as_database_error)?)
     }
 
     fn has_broken(&self, _conn: &mut Self::Connection) -> bool {
