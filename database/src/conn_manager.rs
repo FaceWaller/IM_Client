@@ -8,7 +8,7 @@ use once_cell::sync::OnceCell;
 embed_migrations!("./migration/");  // 数据库升级
 pub(crate) static IMDATABASE: OnceCell<Arc<Mutex<Database>>> = OnceCell::new();
 
-pub fn get_connection(storage_path: &str) -> DataBaseResult<DBConnection, DataBaseError> {
+pub fn init_connection(storage_path: &str) -> DataBaseResult<DBConnection, DataBaseError> {
     if let Some(lock_conn) = IMDATABASE.get() {
         let database = lock_conn.lock().map_err(as_database_error)?;
         let conn = database.get_connection().map_err(as_database_error)?;
@@ -18,6 +18,16 @@ pub fn get_connection(storage_path: &str) -> DataBaseResult<DBConnection, DataBa
         let conn = database.get_connection().map_err(as_database_error)?;
         IMDATABASE.set(Arc::new(Mutex::new(database))).ok();
         Ok(conn)
+    }
+}
+
+pub fn get_connection() -> DataBaseResult<DBConnection, DataBaseError> {
+    if let Some(lock_conn) = IMDATABASE.get() {
+        let database = lock_conn.lock().map_err(as_database_error)?;
+        let conn = database.get_connection().map_err(as_database_error)?;
+        Ok(conn)
+    } else {
+        Err(DataBaseError::CustomError("数据库未连接".to_string()))
     }
 }
 

@@ -1,5 +1,5 @@
 use diesel::{dsl::sql, expression::SqlLiteral, query_dsl::LoadQuery, Connection, RunQueryDsl, SqliteConnection};
-use crate::{DataBaseResult, as_database_error};
+use super::error::{DataBaseResult, as_database_error};
 
 pub trait ConnectionExtension: Connection {
     fn query<ST, T>(&self, query: &str) -> DataBaseResult<T>

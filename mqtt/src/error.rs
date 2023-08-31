@@ -3,7 +3,7 @@ pub type MqttResult<T> = std::result::Result<T, MqttError>;
 
 #[derive(Debug, thiserror::Error)]
 pub enum MqttError {
-    #[error("error happen")]
+    #[error("error happen {0}")]
     CustomError(String),
 }
 

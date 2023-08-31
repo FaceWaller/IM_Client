@@ -1,7 +1,9 @@
 mod error;
-
-pub mod im_db;
-pub use im_db::*;
-
-pub mod im_mqtt;
-pub use im_mqtt::*;
+mod im_db;
+mod im_mqtt;
+mod im_model;
+mod im_manager;
+pub use im_manager::*;
+pub mod schema;
+#[macro_use]
+extern crate diesel;
