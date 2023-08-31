@@ -1,11 +1,16 @@
 use std::{thread::sleep, time::Duration, str::from_utf8};
 use rumqttc::{Event, Packet};
+use database::*;
 
 fn main() {    
     let id = "im_9527";
     let host = "broker.emqx.io";
     let port = 1883;
     let topic = "rumqtt".to_string();
+
+    let storage_path = "../db/";
+    get_connection(storage_path);
+    
 
     let notify = |i: usize , notify: Result<Event, rumqttc::ConnectionError> | {
         if let Some(eve) = notify.ok() {

@@ -1,20 +1,31 @@
-pub use diesel::*;
-pub use diesel_derives::*;
-pub use diesel_migrations::*;
-pub use r2d2::PooledConnection;
-pub use diesel::sql_types::Integer;
-pub use std::{fmt::Debug, io, path::Path};
-// pub mod conn_pool;
-// pub use conn_pool::*;
+// pub use diesel::*;
+// pub use diesel_derives::*;
+// pub use diesel_migrations::*;
+// pub use r2d2::PooledConnection;
+// pub use diesel::sql_types::Integer;
+// pub use std::{fmt::Debug, io, path::Path};
 
-// pub use migrations_internals::connection;
-// #[doc(inline)]
-// pub use migrations_internals::setup_database;
 
-#[macro_use]
-extern crate diesel;
-#[macro_use]
-extern crate diesel_derives;
-// #[allow(unused_imports)]
+pub use migrations_internals::connection;
+#[doc(inline)]
+pub use migrations_internals::setup_database;
+
 // #[macro_use]
-// extern crate diesel_migrations;
+// extern crate diesel;
+// #[macro_use]
+// extern crate diesel_derives;
+// #[allow(unused_imports)]
+#[macro_use]
+extern crate diesel_migrations;
+
+
+pub mod error;
+pub use error::*;
+
+mod conn_manager;
+mod conn_pool;
+mod database;
+mod conn_pragma;
+mod conn_ext;
+
+pub use conn_manager::get_connection;

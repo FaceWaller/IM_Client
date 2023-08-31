@@ -1,4 +1,3 @@
-use std::fmt::Debug;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 use rumqttc::*;
@@ -82,11 +81,4 @@ pub fn publish(topic: String, msg: String) -> MqttResult<()> {
         return Err(err);
     }
     Ok(())
-}
-
-fn as_mqtt_error<E>(e: E) -> MqttError
-where
-    E: Debug + ToString
-{
-    MqttError::CustomError(e.to_string())
 }
