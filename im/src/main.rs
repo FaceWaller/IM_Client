@@ -1,6 +1,7 @@
-use std::{thread::sleep, time::Duration, str::from_utf8};
+use std::{str::from_utf8, path::Path};
 use rumqttc::{Event, Packet};
 use database::*;
+use std::env;
 
 fn main() {    
     let id = "im_9527";
@@ -8,39 +9,47 @@ fn main() {
     let port = 1883;
     let topic = "rumqtt".to_string();
 
-    let storage_path = "../db/";
-    get_connection(storage_path);
-    
-
-    let notify = |i: usize , notify: Result<Event, rumqttc::ConnectionError> | {
-        if let Some(eve) = notify.ok() {
-            match eve {
-                Event::Incoming(data) => {
-                    handle_packet(data);
-                }
-                Event::Outgoing(data) => {
-                    println!("outgoing  {} {:?}", i , data);
-                }
+    if let Some(current_path) = env::current_dir().unwrap().to_str() {
+        let db_path = format!("{}/db", current_path);
+        match get_connection(db_path.as_str()) {
+            Ok(_) => {
+                println!("数据库连接成功 {:?}", db_path);
             }
-        };
-    };
-    match mqtt::connect(id, host, port, notify) {
-        Ok(_) => {
-            println!("连接成功");
-        }
-        Err(e) => {
-            println!("连接失败 {:?}", e);
+            Err(e) => {
+                println!("数据库连接失败 {}",e);
+            }
         }
     }
-    match mqtt::subscribe(topic) {
-        Ok(_) => {
-            println!("订阅成功");
-        }
-        Err(e) => {
-            println!("订阅失败 {:?}", e);
-        }
-    }
-    sleep(Duration::from_secs(100));
+
+
+    // let notify = |i: usize , notify: Result<Event, rumqttc::ConnectionError> | {
+    //     if let Some(eve) = notify.ok() {
+    //         match eve {
+    //             Event::Incoming(data) => {
+    //                 handle_packet(data);
+    //             }
+    //             Event::Outgoing(data) => {
+    //                 println!("outgoing  {} {:?}", i , data);
+    //             }
+    //         }
+    //     };
+    // };
+    // match mqtt::connect(id, host, port, notify) {
+    //     Ok(_) => {
+    //         println!("连接成功");
+    //     }
+    //     Err(e) => {
+    //         println!("连接失败 {:?}", e);
+    //     }
+    // }
+    // match mqtt::subscribe(topic) {
+    //     Ok(_) => {
+    //         println!("订阅成功");
+    //     }
+    //     Err(e) => {
+    //         println!("订阅失败 {:?}", e);
+    //     }
+    // }
 }
 
 fn handle_packet(packet: Packet) {

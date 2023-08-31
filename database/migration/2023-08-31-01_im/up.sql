@@ -4,5 +4,5 @@ CREATE TABLE IF NOT EXISTS im_table (
     toId TEXT,
     time INT,
     format INT,
-    sid TEXT UNIQUE,
+    sid TEXT UNIQUE
 );

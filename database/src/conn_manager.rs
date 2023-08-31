@@ -1,19 +1,11 @@
-use diesel_migrations::*;
+use super::error::*;
 use super::database::*;
 use super::conn_pool::*;
-#[allow(unused_imports)]
-use r2d2::PooledConnection;
 use std::{path::Path, sync::{Mutex, Arc}};
-use super::error::*;
-pub mod prelude {
-    pub use crate::*;
-    pub use diesel::SqliteConnection;
-    pub use diesel::{query_dsl::*, BelongingToDsl, ExpressionMethods, RunQueryDsl};
-}
+use diesel_migrations::*;
 use once_cell::sync::OnceCell;
 
-embed_migrations!("./migration/");
-
+embed_migrations!("./migration/");  // 数据库升级
 pub(crate) static IMDATABASE: OnceCell<Arc<Mutex<Database>>> = OnceCell::new();
 
 pub fn get_connection(storage_path: &str) -> DataBaseResult<DBConnection, DataBaseError> {
@@ -38,6 +30,6 @@ fn init(storage_path: &str) -> DataBaseResult<Database> {
     let database = Database::new(storage_path, db_name, pool_config).map_err(|err| as_database_error(err.to_string()))?;
     let conn = database.get_connection().map_err(|err| as_database_error(err.to_string()))?;
     let _ = setup_database(&*conn).map_err(|err| as_database_error(err.to_string()))?; // 创建版本表
-    let _ = embedded_migrations::run(&*conn); // 升级数据库
+    let _ = embedded_migrations::run(&*conn).map_err(|err| as_database_error(err.to_string()))?; // 升级数据库
     Ok(database)
 }
