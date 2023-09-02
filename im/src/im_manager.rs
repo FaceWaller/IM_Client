@@ -1,6 +1,7 @@
 use super::error::*;
 use super::im_db;
 use super::im_mqtt;
+use super::im_model::DBInsertIMModel;
 use std::sync::{Mutex, Arc};
 use once_cell::sync::OnceCell;
 
@@ -11,12 +12,32 @@ pub fn im_init(db_path: &str, id: &str, host: &str, port: u16, topic: &str) -> I
     Ok(())
 }
 
-pub(crate) static IMMANAGER: OnceCell<Arc<Mutex<IMManager>>> = OnceCell::new();
-
+pub static IMMANAGER: OnceCell<Arc<Mutex<IMManager>>> = OnceCell::new();
 pub struct IMManager {
-
+    recv_msg: Option<Box<dyn Fn(DBInsertIMModel) + Send>>
 }
 
 impl IMManager {
-    
+    pub(crate) fn receive_msg(&self, msg: DBInsertIMModel) -> IMResult<()> {
+        im_db::insert_msg(msg.clone())?;
+        if let Some(recv_msg) = &self.recv_msg {
+            recv_msg(msg);
+        }
+        Ok(())
+    }
+}
+
+pub fn add_recv<F>(recv: F) -> IMResult<()>
+where
+    F: Fn(DBInsertIMModel) + Send + 'static
+{
+    let im_manager_ref = IMMANAGER.get_or_init(|| {
+        Arc::new(Mutex::new(
+            IMManager { recv_msg: None }
+        ))
+    });
+
+    let mut im_manager = im_manager_ref.lock().map_err(as_im_error)?;
+    im_manager.recv_msg = Some(Box::new(recv));
+    Ok(())
 }

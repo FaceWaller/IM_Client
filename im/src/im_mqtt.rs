@@ -1,7 +1,7 @@
 use std::str::from_utf8;
 use rumqttc::{Event, Packet};
 use mqtt;
-use crate::error::{IMResult, as_im_error};
+use crate::{error::{IMResult, as_im_error}, DBInsertIMModel, im_manager::IMMANAGER};
 
 pub fn im_connect(id: &str, host: &str, port: u16) -> IMResult<()> 
 {
@@ -35,8 +35,26 @@ fn handle_packet(packet: Packet) {
         }
         Packet::Publish(publish) => {
             println!("客户端/服务端 发布消息 {:?}", publish);
-
             if let Ok(utf8_str) = from_utf8(&publish.payload) {
+                let msg_res: Result<DBInsertIMModel, _> = serde_json::from_str(utf8_str);
+                match msg_res {
+                    Ok(msg) => {
+                        if let Some(manager) = IMMANAGER.get() {
+                            if let Some(im_manager) = manager.lock().ok() {
+                                im_manager.receive_msg(msg).ok();
+                            } else {
+                                println!("读取immanager异常");
+                            }
+                        } else {
+                            println!("IMMANAGER 未初始化");
+                        }
+                    }
+                    Err(e) => {
+                        println!("消息格式有误 {:?}", e);
+                    }
+                }
+
+
                 println!("xxxxx {}", utf8_str);
             }
         }
