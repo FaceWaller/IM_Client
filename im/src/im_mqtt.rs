@@ -12,7 +12,7 @@ pub fn im_connect(id: &str, host: &str, port: u16) -> IMResult<()>
                     handle_packet(data);
                 }
                 Event::Outgoing(data) => {
-                    println!("outgoing  {} {:?}", i , data);
+                    // println!("outgoing  {} {:?}", i , data);
                 }
             }
         };
@@ -28,13 +28,13 @@ pub fn im_subscribe(topic:&str) -> IMResult<()> {
 fn handle_packet(packet: Packet) {
     match packet {
         Packet::Connect(connect) => {
-            println!("客户端发起连接 {:?}", connect);
+            // println!("客户端发起连接 {:?}", connect);
         }
         Packet::ConnAck(conn_ack) => {
-            println!("服务端确认连接 {:?}", conn_ack);
+            // println!("服务端确认连接 {:?}", conn_ack);
         }
         Packet::Publish(publish) => {
-            println!("客户端/服务端 发布消息 {:?}", publish);
+            // println!("客户端/服务端 发布消息 {:?}", publish);
             if let Ok(utf8_str) = from_utf8(&publish.payload) {
                 let msg_res: Result<DBInsertIMModel, _> = serde_json::from_str(utf8_str);
                 match msg_res {
@@ -59,37 +59,37 @@ fn handle_packet(packet: Packet) {
             }
         }
         Packet::PubAck(pub_ack) => {
-            println!("客户端/服务端 确认发布消息 {:?}", pub_ack);
+            // println!("客户端/服务端 确认发布消息 {:?}", pub_ack);
         }
         Packet::PubRec(pub_rec) => {
-            println!("客户端/服务端 收到消息 {:?}", pub_rec);
+            // println!("客户端/服务端 收到消息 {:?}", pub_rec);
         }
         Packet::PubRel(pub_rel) => {
-            println!("客户端/服务端 消息释放 {:?}", pub_rel);
+            // println!("客户端/服务端 消息释放 {:?}", pub_rel);
         }
         Packet::PubComp(pub_comp) => {
-            println!("客户端/服务端 消息完成 {:?}", pub_comp);
+            // println!("客户端/服务端 消息完成 {:?}", pub_comp);
         }
         Packet::Subscribe(subscribe) => {
-            println!("客户端发起订阅 {:?}", subscribe);
+            // println!("客户端发起订阅 {:?}", subscrisbe);
         }
         Packet::SubAck(sub_ack) => {
-            println!("服务端确认订阅 {:?}", sub_ack);
+            // println!("服务端确认订阅 {:?}", sub_ack);
         }
         Packet::Unsubscribe(unsubscribe) => {
-            println!("客户端取消订阅 {:?}", unsubscribe);
+            // println!("客户端取消订阅 {:?}", unsubscribe);
         }
         Packet:: UnsubAck(unsub_ack) => {
-            println!("服务端确认取消订阅 {:?}", unsub_ack);
+            // println!("服务端确认取消订阅 {:?}", unsub_ack);
         }
         Packet::PingReq => {
-            println!("客户端ping");
+            // println!("客户端ping");
         }
         Packet::PingResp => {
-            println!("服务端回复 ping");
+            // println!("服务端回复 ping");
         }
         Packet::Disconnect => {
-            println!("客户端断开连接");
+            // println!("客户端断开连接");
         }
     }
 }

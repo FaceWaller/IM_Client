@@ -1,7 +1,7 @@
 table! {
     im_table (autoId) {
         autoId -> BigInt,
-        formId -> Text,
+        fromId -> Text,
         toId -> Text,
         time -> BigInt,
         format -> Integer,

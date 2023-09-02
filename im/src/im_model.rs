@@ -1,6 +1,6 @@
 use super::schema::im_table;
 use serde;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use diesel::{
     AsChangeset, Associations, Identifiable, Insertable,
@@ -9,14 +9,14 @@ use diesel::{
 
 #[allow(non_snake_case)]
 #[derive(
-    Default, PartialEq, Clone, Debug, Identifiable, Associations, Queryable,
+    Serialize, Default, PartialEq, Clone, Debug, Identifiable, Associations, Queryable,
 )]
 #[table_name = "im_table"]
 #[primary_key(autoId)]
 
 pub struct DBFetchIMModel {
     pub(crate) autoId: i64,
-    pub(crate) formId: String,
+    pub(crate) fromId: String,
     pub(crate) toId: String,
     pub(crate) time: i64,
     pub(crate) format: i32,
@@ -26,16 +26,16 @@ pub struct DBFetchIMModel {
 
 #[allow(non_snake_case)]
 #[derive(
-    Deserialize, Default, PartialEq, Clone, Debug, Associations, Insertable,
+    Serialize, Deserialize, Default, PartialEq, Clone, Debug, Associations, Insertable,
 )]
 #[table_name = "im_table"]
 pub struct DBInsertIMModel {
-    pub(crate) formId: String,
-    pub(crate) toId: String,
-    pub(crate) time: i64,
-    pub(crate) format: i32,
-    pub(crate) sid: String,
-    pub(crate) msg: String,
+    pub fromId: String,
+    pub toId: String,
+    pub time: i64,
+    pub format: i32,
+    pub sid: String,
+    pub msg: String,
 }
 
 #[allow(non_snake_case)]
@@ -44,7 +44,7 @@ pub struct DBInsertIMModel {
 )]
 #[table_name = "im_table"]
 pub struct DBChangestIMModel {
-    pub(crate) formId: Option<String>,
+    pub(crate) fromId: Option<String>,
     pub(crate) toId: Option<String>,
     pub(crate) time: Option<i64>,
     pub(crate) format: Option<i32>,

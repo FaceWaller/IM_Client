@@ -7,7 +7,7 @@ mod schema;
 #[macro_use]
 extern crate diesel;
 
-pub use im_model::*;
-pub use im_manager::{im_init, add_recv};
+pub use im_model::DBInsertIMModel;
+pub use im_manager::{im_init, add_recv, send_msg};
 pub use im_db::fetch_latest_msgs;
 

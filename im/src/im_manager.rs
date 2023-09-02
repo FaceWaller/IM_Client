@@ -3,6 +3,7 @@ use super::im_db;
 use super::im_mqtt;
 use super::im_model::DBInsertIMModel;
 use std::sync::{Mutex, Arc};
+use mqtt::mqtt_manager;
 use once_cell::sync::OnceCell;
 
 pub fn im_init(db_path: &str, id: &str, host: &str, port: u16, topic: &str) -> IMResult<()> {
@@ -39,5 +40,11 @@ where
 
     let mut im_manager = im_manager_ref.lock().map_err(as_im_error)?;
     im_manager.recv_msg = Some(Box::new(recv));
+    Ok(())
+}
+
+pub fn send_msg(topic: &str, msg: DBInsertIMModel) -> IMResult<()> {
+    let msg_str = serde_json::to_string(&msg).map_err(as_im_error)?;
+    mqtt_manager::publish(topic.to_string(), msg_str).map_err(as_im_error)?;
     Ok(())
 }
