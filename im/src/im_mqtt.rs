@@ -3,6 +3,7 @@ use rumqttc::{Event, Packet};
 use mqtt;
 use crate::{error::{IMResult, as_im_error}, DBInsertIMModel, im_manager::IMMANAGER};
 
+#[allow(unused_variables)]
 pub fn im_connect(id: &str, host: &str, port: u16) -> IMResult<()> 
 {
     let notifi = |i: usize , notify: Result<Event, rumqttc::ConnectionError> | {
@@ -25,6 +26,7 @@ pub fn im_subscribe(topic:&str) -> IMResult<()> {
     mqtt::subscribe(topic.to_string()).map_err(as_im_error)
 }
 
+#[allow(unused_variables)]
 fn handle_packet(packet: Packet) {
     match packet {
         Packet::Connect(connect) => {
