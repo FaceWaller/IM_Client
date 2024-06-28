@@ -38,6 +38,11 @@ pub struct DBInsertIMModel {
     pub msg: String,
 }
 
+impl DBInsertIMModel {
+    pub fn to_json_string(&self) -> String {
+        serde_json::to_string(&self).expect("Failed to serialize to JSON")
+    }
+}
 #[allow(non_snake_case)]
 #[derive(
     Default, PartialEq, Clone, Debug, Associations, AsChangeset,

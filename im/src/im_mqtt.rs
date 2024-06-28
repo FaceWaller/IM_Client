@@ -55,9 +55,6 @@ fn handle_packet(packet: Packet) {
                         println!("消息格式有误 {:?}", e);
                     }
                 }
-
-
-                println!("xxxxx {}", utf8_str);
             }
         }
         Packet::PubAck(pub_ack) => {
