@@ -10,6 +10,6 @@ name = "imffi"
 crate-type = ["staticlib", "cdylib"]
 
 [dependencies]
-im = { path = '../im'}
+im = { path = '../Rust_IM/im'}
 libc = "0.2"
 rand = "*"

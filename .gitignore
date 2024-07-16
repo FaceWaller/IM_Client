@@ -1,2 +1,6 @@
-**/target/
-**/**.lock
+im/target/
+mqtt/target/
+database/target/
+im/**.lock
+mqtt/**.lock
+database/**.lock
