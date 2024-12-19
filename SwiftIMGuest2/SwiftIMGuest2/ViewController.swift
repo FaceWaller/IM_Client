@@ -215,14 +215,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 "msg": msg
             ];
             self.addMsg(msgData: msg_datga)
-            tableView.reloadData()
             inputTextField.text = nil
         }
     }
     
     private func addMsg(msgData: [String: Any]) {
         data.add(msgData)
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     private func generateRandomString(length: Int) -> String {
