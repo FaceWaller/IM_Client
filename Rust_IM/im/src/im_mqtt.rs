@@ -1,12 +1,15 @@
-use std::str::from_utf8;
-use rumqttc::{Event, Packet};
+use crate::{
+    error::{as_im_error, IMResult},
+    im_manager::IMMANAGER,
+    DBInsertIMModel,
+};
 use mqtt;
-use crate::{error::{IMResult, as_im_error}, DBInsertIMModel, im_manager::IMMANAGER};
+use rumqttc::{Event, Packet};
+use std::str::from_utf8;
 
 #[allow(unused_variables)]
-pub fn im_connect(id: &str, host: &str, port: u16) -> IMResult<()> 
-{
-    let notifi = |i: usize , notify: Result<Event, rumqttc::ConnectionError> | {
+pub fn im_connect(id: &str, host: &str, port: u16) -> IMResult<()> {
+    let notifi = |i: usize, notify: Result<Event, rumqttc::ConnectionError>| {
         if let Some(eve) = notify.ok() {
             match eve {
                 Event::Incoming(data) => {
@@ -22,7 +25,7 @@ pub fn im_connect(id: &str, host: &str, port: u16) -> IMResult<()>
     Ok(())
 }
 
-pub fn im_subscribe(topic:&str) -> IMResult<()> {
+pub fn im_subscribe(topic: &str) -> IMResult<()> {
     mqtt::subscribe(topic.to_string()).map_err(as_im_error)
 }
 
@@ -78,7 +81,7 @@ fn handle_packet(packet: Packet) {
         Packet::Unsubscribe(unsubscribe) => {
             // println!("客户端取消订阅 {:?}", unsubscribe);
         }
-        Packet:: UnsubAck(unsub_ack) => {
+        Packet::UnsubAck(unsub_ack) => {
             // println!("服务端确认取消订阅 {:?}", unsub_ack);
         }
         Packet::PingReq => {
@@ -97,4 +100,3 @@ fn handle_packet(packet: Packet) {
 // PUBREC（发布收到确认）： 服务器接收到消息后，向发布者发送PUBREC消息，表示消息已经收到。
 // PUBREL（发布释放）： 发布者收到PUBREC消息后，向服务器发送PUBREL消息，表示它已经准备好释放消息的发布状态。
 // PUBCOMP（发布完成）： 服务器收到PUBREL消息后，向发布者发送PUBCOMP消息，表示消息发布已经完成，消息已成功传递。
-    

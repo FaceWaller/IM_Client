@@ -2,15 +2,10 @@ use super::schema::im_table;
 use serde;
 use serde::{Deserialize, Serialize};
 
-use diesel::{
-    AsChangeset, Associations, Identifiable, Insertable,
-    Queryable,
-};
+use diesel::{AsChangeset, Associations, Identifiable, Insertable, Queryable};
 
 #[allow(non_snake_case)]
-#[derive(
-    Serialize, Default, PartialEq, Clone, Debug, Identifiable, Associations, Queryable,
-)]
+#[derive(Serialize, Default, PartialEq, Clone, Debug, Identifiable, Associations, Queryable)]
 #[table_name = "im_table"]
 #[primary_key(autoId)]
 
@@ -26,7 +21,15 @@ pub struct DBFetchIMModel {
 
 #[allow(non_snake_case)]
 #[derive(
-    Serialize, Deserialize, Default, PartialEq, Clone, Debug, Associations, Insertable,
+    uniffi::Record,
+    Serialize,
+    Deserialize,
+    Default,
+    PartialEq,
+    Clone,
+    Debug,
+    Associations,
+    Insertable,
 )]
 #[table_name = "im_table"]
 pub struct DBInsertIMModel {
@@ -44,9 +47,7 @@ impl DBInsertIMModel {
     }
 }
 #[allow(non_snake_case)]
-#[derive(
-    Default, PartialEq, Clone, Debug, Associations, AsChangeset,
-)]
+#[derive(Default, PartialEq, Clone, Debug, Associations, AsChangeset)]
 #[table_name = "im_table"]
 pub struct DBChangestIMModel {
     pub(crate) fromId: Option<String>,

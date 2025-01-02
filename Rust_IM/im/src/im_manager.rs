@@ -1,10 +1,10 @@
 use super::error::*;
 use super::im_db;
-use super::im_mqtt;
 use super::im_model::DBInsertIMModel;
-use std::sync::{Mutex, Arc};
+use super::im_mqtt;
 use mqtt::mqtt_manager;
 use once_cell::sync::OnceCell;
+use std::sync::{Arc, Mutex};
 
 pub fn im_init(db_path: &str, id: &str, host: &str, port: u16, topic: &str) -> IMResult<()> {
     im_db::init_db(db_path)?;
@@ -15,7 +15,7 @@ pub fn im_init(db_path: &str, id: &str, host: &str, port: u16, topic: &str) -> I
 
 pub static IMMANAGER: OnceCell<Arc<Mutex<IMManager>>> = OnceCell::new();
 pub struct IMManager {
-    recv_msg: Option<Box<dyn Fn(DBInsertIMModel) + Send>>
+    recv_msg: Option<Box<dyn Fn(DBInsertIMModel) + Send>>,
 }
 
 impl IMManager {
@@ -30,13 +30,10 @@ impl IMManager {
 
 pub fn add_recv<F>(recv: F) -> IMResult<()>
 where
-    F: Fn(DBInsertIMModel) + Send + 'static
+    F: Fn(DBInsertIMModel) + Send + 'static,
 {
-    let im_manager_ref = IMMANAGER.get_or_init(|| {
-        Arc::new(Mutex::new(
-            IMManager { recv_msg: None }
-        ))
-    });
+    let im_manager_ref =
+        IMMANAGER.get_or_init(|| Arc::new(Mutex::new(IMManager { recv_msg: None })));
 
     let mut im_manager = im_manager_ref.lock().map_err(as_im_error)?;
     im_manager.recv_msg = Some(Box::new(recv));
@@ -44,6 +41,13 @@ where
 }
 
 pub fn send_msg(topic: &str, msg: DBInsertIMModel) -> IMResult<()> {
+    if let Some(manager) = IMMANAGER.get() {
+        if let Some(im_manager) = manager.lock().ok() {
+            im_manager.receive_msg(msg.clone()).ok();
+        } else {
+            println!("读取immanager异常");
+        }
+    }
     let msg_str = serde_json::to_string(&msg).map_err(as_im_error)?;
     mqtt_manager::publish(topic.to_string(), msg_str).map_err(as_im_error)?;
     Ok(())

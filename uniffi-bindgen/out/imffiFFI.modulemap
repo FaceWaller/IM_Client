@@ -1,0 +1,4 @@
+module imffiFFI {
+    header "imffiFFI.h"
+    export *
+}

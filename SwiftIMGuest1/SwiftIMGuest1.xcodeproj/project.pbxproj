@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EA9D39B2D26CA2F0039FDF9 /* im.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA9D3982D26CA2F0039FDF9 /* im.swift */; };
+		1EF20EBB2D216C110041E866 /* imffi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF20EBA2D216C110041E866 /* imffi.swift */; };
 		E73BD1F12C4687C400363513 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73BD1F02C4687C400363513 /* AppDelegate.swift */; };
 		E73BD1F32C4687C400363513 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73BD1F22C4687C400363513 /* SceneDelegate.swift */; };
 		E73BD1F52C4687C400363513 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73BD1F42C4687C400363513 /* ViewController.swift */; };
@@ -18,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1EA9D3982D26CA2F0039FDF9 /* im.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = im.swift; sourceTree = "<group>"; };
+		1EA9D39C2D26CB060039FDF9 /* imFFI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imFFI.h; sourceTree = "<group>"; };
+		1EA9D39D2D26CB060039FDF9 /* imffiFFI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imffiFFI.h; sourceTree = "<group>"; };
+		1EF20EBA2D216C110041E866 /* imffi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imffi.swift; sourceTree = "<group>"; };
 		E73BD1ED2C4687C400363513 /* SwiftIMGuest1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftIMGuest1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E73BD1F02C4687C400363513 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E73BD1F22C4687C400363513 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,7 +32,6 @@
 		E73BD1F92C4687C400363513 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E73BD1FC2C4687C400363513 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E73BD1FE2C4687C400363513 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E73BD2232C468A6A00363513 /* rust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rust.h; sourceTree = "<group>"; };
 		E73BD2242C468A6A00363513 /* libimffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libimffi.a; sourceTree = "<group>"; };
 		E73BD2282C468B5700363513 /* SwiftIMGuest1-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftIMGuest1-Bridging-Header.h"; sourceTree = "<group>"; };
 		E73BD22D2C468BBC00363513 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -66,7 +71,10 @@
 			isa = PBXGroup;
 			children = (
 				E73BD2242C468A6A00363513 /* libimffi.a */,
-				E73BD2232C468A6A00363513 /* rust.h */,
+				1EA9D39C2D26CB060039FDF9 /* imFFI.h */,
+				1EA9D39D2D26CB060039FDF9 /* imffiFFI.h */,
+				1EA9D3982D26CA2F0039FDF9 /* im.swift */,
+				1EF20EBA2D216C110041E866 /* imffi.swift */,
 				E73BD1F02C4687C400363513 /* AppDelegate.swift */,
 				E73BD1F22C4687C400363513 /* SceneDelegate.swift */,
 				E73BD1F42C4687C400363513 /* ViewController.swift */,
@@ -160,7 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E73BD1F52C4687C400363513 /* ViewController.swift in Sources */,
+				1EF20EBB2D216C110041E866 /* imffi.swift in Sources */,
 				E73BD1F12C4687C400363513 /* AppDelegate.swift in Sources */,
+				1EA9D39B2D26CA2F0039FDF9 /* im.swift in Sources */,
 				E73BD1F32C4687C400363513 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

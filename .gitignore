@@ -1,6 +1,2 @@
-im/target/
-mqtt/target/
-database/target/
-im/**.lock
-mqtt/**.lock
-database/**.lock
+**/target/**
+**/**.lock
