@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  SwiftIMGuest2
+//  SwiftIMGuest1
 //
-//  Created by alan on 2024/7/18.
+//  Created by alan on 2024/7/16.
 //
 
 import UIKit
@@ -34,28 +34,27 @@ class CustomIMTableViewCell: UITableViewCell {
         ])
     }
     
-    func updateMsgData(msgData: [String: Any], self_id:String) {
-        let msg_from = msgData["fromId"]
-        let msg = msgData["msg"]
-        if self_id == msg_from as! String {
-            customLabel.text = "发出消息: \(String(describing: msg as! String))"
+    func updateMsgData(msgData: DbInsertImModel, self_id:String) {
+        let msg_from = msgData.fromId
+        if self_id == msg_from  {
+            customLabel.text = "发出消息: \(String(describing: msgData.msg))"
         } else {
-            customLabel.text = "收到消息: \(String(describing: msg as! String))"
+            customLabel.text = "收到消息: \(String(describing: msgData.msg))"
         }
     }
 }
 
-
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MsgCall {
     private static var currentInstance: ViewController?
-
+    
     // IM config
     let self_id = "im_9528";
     let to_id = "im_9527";
     let receive_topic = "rumqtt_9528";
     let send_topic = "rumqtt_9527";
+    let host = "broker.emqx.io"
     let portInt32 = Int32(1883);
-    
+
     // UI
     let tableView = UITableView()
     let inputTextField = UITextField()
@@ -64,16 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let bottomOffset: CGFloat = 44
     // Data
     let data = NSMutableArray()
-    
-    let receiveCallback: @convention(c) (UnsafePointer<CChar>?) -> Void = { message in
-        guard let message = message else { return }
-        let messageString = String(cString: message)
-        if let instance = ViewController.currentInstance {
-            if let dict = instance.jsonStringToDictionary(messageString) {
-                instance.addMsg(msgData: dict)
-            }
-        }
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,19 +76,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func initIM() {
-        let host = ("broker.emqx.io" as NSString).utf8String;
-        
         if let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             let pathString = documentsPath.path
-            let dbPath = (pathString as NSString).utf8String
-            init_im(dbPath, (self_id as NSString).utf8String, host, portInt32, (receive_topic as NSString).utf8String, receiveCallback);
+            initIm(dbPath: pathString, id: self_id, host: host, port: portInt32, recvTopic: receive_topic, call: self)
         } else {
             print("获取沙盒文件地址出错")
         }
     }
     
     func initUI() {
-        
         view.addSubview(tableView)
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.gray
@@ -195,7 +181,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return UITableViewCell()
         }
         let msg_data = data[indexPath.row]
-        cell.updateMsgData(msgData: msg_data as! [String : Any], self_id: self_id)
+        cell.updateMsgData(msgData:msg_data as! DbInsertImModel, self_id: self_id)
         return cell
     }
     
@@ -205,25 +191,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @objc private func btnclick() {
         if let msg = inputTextField.text {
-            send_msg((self_id as NSString).utf8String, (to_id as NSString).utf8String, (send_topic as NSString).utf8String, (msg as NSString).utf8String)
-            let msg_datga: [String: Any] = [
-                "fromId": self_id,
-                "toId": to_id,
-                "time": NSDate().timeIntervalSince1970,
-                "format": 0,
-                "sig": self.generateRandomString(length:10),
-                "msg": msg
-            ];
-            self.addMsg(msgData: msg_datga)
+            sendMsg(fromId: self_id, toId: to_id, sendTopic: send_topic, msg: msg)
             inputTextField.text = nil
         }
     }
     
-    private func addMsg(msgData: [String: Any]) {
+    private func addMsg(msgData: DbInsertImModel) {
         data.add(msgData)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+        
     }
     
     private func generateRandomString(length: Int) -> String {
@@ -238,18 +216,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return randomString
     }
     
-    func jsonStringToDictionary(_ jsonString: String) -> [String: Any]? {
-        if let jsonData = jsonString.data(using: .utf8) {
-            do {
-                // 将 JSON 数据解析为字典
-                let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
-                return dictionary
-            } catch {
-                print("Error parsing JSON: \(error)")
-                return nil
-            }
-        }
-        return nil
+    func receiveMsg(record: DbInsertImModel) {
+        self.addMsg(msgData: record)
     }
 }
 

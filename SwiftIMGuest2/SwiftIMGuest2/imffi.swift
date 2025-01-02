@@ -1,0 +1,1 @@
+/Users/wallerface/Desktop/IM_Client/uniffi-bindgen/out/imffi.swift
