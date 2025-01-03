@@ -2,6 +2,21 @@
 
 IM在移动互联网中是一个非常重要的能力，IM不仅提供了快速、实时的通信渠道，还可以支持多媒体文件的传输、群聊、语音通话和视频会议等功能。这使得它成为了各种应用和平台的核心功能。掌握如何创建和定制自己的IM客户端是一项非常有价值的技能，不仅可以为您的个人项目增色不少，还可以在职业发展中开辟新的机会。
 
+#### 运行方式
+
+1. 打包rust，cd进入ffi文件夹，执行打包命令
+   模拟器：   cargo lipo --targets aarch64-apple-ios-sim
+   真机：       cargo lipo --targets aarch64-apple-ios
+2. 生成swift声明
+
+   首先cd进入ffi文件夹，执行cargo build --release
+
+   然后cd进入uniffi-bindgen文件夹，执行 cargo run --bin uniffi-bindgen generate --library ../ffi/target/release/libimffi.a --language swift --out-dir out
+   可以看到out文件夹中生成了若干文件
+3. 引入swift工程
+
+   将步骤1生成的libimffi.a  步骤2生成的若干.h .swift文件引入swift工程 （demo中已引入相对文件夹位置）
+
 
 
 #### 技术列表
