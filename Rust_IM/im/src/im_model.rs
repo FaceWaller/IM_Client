@@ -9,13 +9,13 @@ use serde::{Deserialize, Serialize};
 #[derive(uniffi::Record, Serialize, Deserialize, Default, PartialEq, Clone, Debug, Queryable)]
 #[diesel(table_name = im_table)]
 pub struct DBFetchIMModel {
-    pub(crate) autoId: i64,
-    pub(crate) fromId: String,
-    pub(crate) toId: String,
-    pub(crate) time: i64,
-    pub(crate) format: i32,
-    pub(crate) sid: String,
-    pub(crate) msg: String,
+    pub autoId: i64,
+    pub fromId: String,
+    pub toId: String,
+    pub time: i64,
+    pub format: i32,
+    pub sid: String,
+    pub msg: String,
 }
 
 #[allow(non_snake_case)]
@@ -37,12 +37,12 @@ impl DBInsertIMModel {
 }
 #[allow(non_snake_case)]
 #[derive(uniffi::Record, Serialize, Deserialize, Default, PartialEq, Clone, Debug, AsChangeset)]
-#[table_name = "im_table"]
+#[diesel(table_name = im_table)]
 pub struct DBChangestIMModel {
-    pub(crate) fromId: Option<String>,
-    pub(crate) toId: Option<String>,
-    pub(crate) time: Option<i64>,
-    pub(crate) format: Option<i32>,
-    pub(crate) sid: String,
-    pub(crate) msg: Option<String>,
+    pub fromId: Option<String>,
+    pub toId: Option<String>,
+    pub time: Option<i64>,
+    pub format: Option<i32>,
+    pub sid: String,
+    pub msg: Option<String>,
 }

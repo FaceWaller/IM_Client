@@ -1,7 +1,15 @@
-use im::{self, DBChangestIMModel, DBFetchIMModel, DBInsertIMModel};
+use im::*;
 use rand::Rng;
 use std::time::SystemTime;
 uniffi::setup_scaffolding!();
+
+#[derive(Debug, thiserror::Error, uniffi::Error)]
+pub enum UniffiError {
+    #[error("{0}")]
+    IMError(String),
+    #[error("sevice Not Found")]
+    NotFound,
+}
 
 #[uniffi::export(callback_interface)]
 pub trait MsgCall: Sync + Send {
@@ -50,14 +58,14 @@ fn send_msg(from_id: String, to_id: String, send_topic: String, msg: String) {
 }
 
 #[uniffi::export]
-fn delete_msg(im_sid: String) -> Result<(), String> {
-    im::delete_msg(im_sid).map_err(|err| err.to_string())?;
+fn delete_msg(im_sid: String) -> Result<(), UniffiError> {
+    im::delete_msg(im_sid).map_err(|err| UniffiError::IMError(err.to_string()))?;
     Ok(())
 }
 
 #[uniffi::export]
-fn update_msg(model: DBChangestIMModel) -> Result<(), String> {
-    im::update_msg(model).map_err(|err| err.to_string())?;
+fn update_msg(model: DBChangestIMModel) -> Result<(), UniffiError> {
+    im::update_msg(model).map_err(|err| UniffiError::IMError(err.to_string()))?;
     Ok(())
 }
 

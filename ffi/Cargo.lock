@@ -426,6 +426,7 @@ dependencies = [
  "im",
  "libc",
  "rand",
+ "thiserror",
  "uniffi",
 ]
 

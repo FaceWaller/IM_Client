@@ -4,13 +4,22 @@ use super::im_model::DBInsertIMModel;
 use super::im_mqtt;
 use mqtt::mqtt_manager;
 use once_cell::sync::OnceCell;
+use std::path::MAIN_SEPARATOR;
 use std::sync::{Arc, Mutex};
 
 pub fn im_init(db_path: &str, id: &str, host: &str, port: u16, topic: &str) -> IMResult<()> {
-    im_db::init_db(db_path)?;
+    im_db::init_db(db_file_uri(db_path, id).as_str())?;
     im_mqtt::im_connect(id, host, port)?;
     im_mqtt::im_subscribe(topic)?;
     Ok(())
+}
+fn db_file_uri(dir: &str, name: &str) -> String {
+    let mut uri = dir.to_owned();
+    if !uri.ends_with(MAIN_SEPARATOR) {
+        uri.push(MAIN_SEPARATOR);
+    }
+    uri.push_str(&format!("{}.sqlite", name));
+    uri
 }
 
 pub static IMMANAGER: OnceCell<Arc<Mutex<IMManager>>> = OnceCell::new();

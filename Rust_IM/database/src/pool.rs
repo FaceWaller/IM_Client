@@ -1,8 +1,11 @@
 use crate::error::*;
 use diesel::{
+    connection::SimpleConnection,
     r2d2::{ConnectionManager, Pool, PooledConnection},
     RunQueryDsl, SqliteConnection,
 };
+pub use diesel_migrations::embed_migrations;
+pub use diesel_migrations::EmbeddedMigrations;
 use diesel_migrations::MigrationHarness;
 use std::path::Path;
 
@@ -11,6 +14,7 @@ pub type DBConn = PooledConnection<ConnectionManager<SqliteConnection>>;
 pub struct DBPool {
     pool: Pool<ConnectionManager<SqliteConnection>>,
 }
+const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations");
 
 impl DBPool {
     pub fn new(path_str: &str) -> MyResult<DBPool> {
@@ -30,14 +34,25 @@ impl DBPool {
         Ok(db)
     }
 
-    pub fn migrate_up(&self) -> MyResult<()> {
-        let migrations = diesel_migrations::FileBasedMigrations::find_migrations_directory()
-            .map_err(map_sqlite_error)?;
+    fn migrate_up(&self) -> MyResult<()> {
+        self.set_up_migration_db()?;
         let mut connection = self.connect()?;
         connection
-            .run_pending_migrations(migrations)
-            .and(Ok(()))
-            .or(Err(map_sqlite_error("数据库已是最新")))
+            .run_pending_migrations(MIGRATIONS)
+            .map_err(map_sqlite_error)?;
+        Ok(())
+    }
+
+    fn set_up_migration_db(&self) -> MyResult<()> {
+        let sql = format!(
+            "    CREATE TABLE IF NOT EXISTS __diesel_schema_migrations (
+            version VARCHAR(50) PRIMARY KEY NOT NULL,
+            run_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        );"
+        );
+        let mut conn = self.connect()?;
+        conn.batch_execute(&sql).map_err(map_sqlite_error)?;
+        Ok(())
     }
 
     pub fn connect(&self) -> MyResult<DBConn> {

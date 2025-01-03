@@ -271,6 +271,21 @@ typedef struct UniffiVTableCallbackInterfaceMsgCall {
 void uniffi_imffi_fn_init_callback_vtable_msgcall(UniffiVTableCallbackInterfaceMsgCall* _Nonnull vtable
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_DELETE_MSG
+#define UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_DELETE_MSG
+void uniffi_imffi_fn_func_delete_msg(RustBuffer im_sid, RustCallStatus *_Nonnull out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_FETCH_LATEST_LIMIT_MSGS
+#define UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_FETCH_LATEST_LIMIT_MSGS
+RustBuffer uniffi_imffi_fn_func_fetch_latest_limit_msgs(int64_t before_time, int64_t limit, RustCallStatus *_Nonnull out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_FETCH_LATEST_MSGS
+#define UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_FETCH_LATEST_MSGS
+RustBuffer uniffi_imffi_fn_func_fetch_latest_msgs(int64_t before_time, RustCallStatus *_Nonnull out_status
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_INIT_IM
 #define UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_INIT_IM
 void uniffi_imffi_fn_func_init_im(RustBuffer db_path, RustBuffer id, RustBuffer host, int32_t port, RustBuffer recv_topic, uint64_t call, RustCallStatus *_Nonnull out_status
@@ -279,6 +294,11 @@ void uniffi_imffi_fn_func_init_im(RustBuffer db_path, RustBuffer id, RustBuffer 
 #ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_SEND_MSG
 #define UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_SEND_MSG
 void uniffi_imffi_fn_func_send_msg(RustBuffer from_id, RustBuffer to_id, RustBuffer send_topic, RustBuffer msg, RustCallStatus *_Nonnull out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_UPDATE_MSG
+#define UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_UPDATE_MSG
+void uniffi_imffi_fn_func_update_msg(RustBuffer model, RustCallStatus *_Nonnull out_status
 );
 #endif
 #ifndef UNIFFI_FFIDEF_FFI_IMFFI_RUSTBUFFER_ALLOC
@@ -561,6 +581,24 @@ void ffi_imffi_rust_future_free_void(uint64_t handle
 void ffi_imffi_rust_future_complete_void(uint64_t handle, RustCallStatus *_Nonnull out_status
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_DELETE_MSG
+#define UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_DELETE_MSG
+uint16_t uniffi_imffi_checksum_func_delete_msg(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_FETCH_LATEST_LIMIT_MSGS
+#define UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_FETCH_LATEST_LIMIT_MSGS
+uint16_t uniffi_imffi_checksum_func_fetch_latest_limit_msgs(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_FETCH_LATEST_MSGS
+#define UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_FETCH_LATEST_MSGS
+uint16_t uniffi_imffi_checksum_func_fetch_latest_msgs(void
+    
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_INIT_IM
 #define UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_INIT_IM
 uint16_t uniffi_imffi_checksum_func_init_im(void
@@ -570,6 +608,12 @@ uint16_t uniffi_imffi_checksum_func_init_im(void
 #ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_SEND_MSG
 #define UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_SEND_MSG
 uint16_t uniffi_imffi_checksum_func_send_msg(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_UPDATE_MSG
+#define UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_UPDATE_MSG
+uint16_t uniffi_imffi_checksum_func_update_msg(void
     
 );
 #endif

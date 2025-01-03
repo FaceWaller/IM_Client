@@ -1,5 +1,5 @@
-use super::error::*;
 use super::conn_pool::*;
+use super::error::*;
 use r2d2::PooledConnection;
 use std::sync::Arc;
 

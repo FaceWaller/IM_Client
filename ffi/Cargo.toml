@@ -12,4 +12,5 @@ crate-type = ["staticlib", "cdylib"]
 im = { path = '../Rust_IM/im'}
 libc = "0.2"
 rand = "*"
+thiserror = "*"
 uniffi = { version = "0.28.3", features = ["cli"] }
