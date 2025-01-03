@@ -1,3 +1,4 @@
+use diesel::*;
 table! {
     im_table (autoId) {
         autoId -> BigInt,

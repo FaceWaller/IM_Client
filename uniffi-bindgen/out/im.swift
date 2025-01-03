@@ -470,6 +470,112 @@ fileprivate struct FfiConverterString: FfiConverter {
 }
 
 
+public struct DbFetchImModel {
+    public var autoId: Int64
+    public var fromId: String
+    public var toId: String
+    public var time: Int64
+    public var format: Int32
+    public var sid: String
+    public var msg: String
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(autoId: Int64, fromId: String, toId: String, time: Int64, format: Int32, sid: String, msg: String) {
+        self.autoId = autoId
+        self.fromId = fromId
+        self.toId = toId
+        self.time = time
+        self.format = format
+        self.sid = sid
+        self.msg = msg
+    }
+}
+
+
+
+extension DbFetchImModel: Equatable, Hashable {
+    public static func ==(lhs: DbFetchImModel, rhs: DbFetchImModel) -> Bool {
+        if lhs.autoId != rhs.autoId {
+            return false
+        }
+        if lhs.fromId != rhs.fromId {
+            return false
+        }
+        if lhs.toId != rhs.toId {
+            return false
+        }
+        if lhs.time != rhs.time {
+            return false
+        }
+        if lhs.format != rhs.format {
+            return false
+        }
+        if lhs.sid != rhs.sid {
+            return false
+        }
+        if lhs.msg != rhs.msg {
+            return false
+        }
+        return true
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(autoId)
+        hasher.combine(fromId)
+        hasher.combine(toId)
+        hasher.combine(time)
+        hasher.combine(format)
+        hasher.combine(sid)
+        hasher.combine(msg)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeDBFetchIMModel: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> DbFetchImModel {
+        return
+            try DbFetchImModel(
+                autoId: FfiConverterInt64.read(from: &buf), 
+                fromId: FfiConverterString.read(from: &buf), 
+                toId: FfiConverterString.read(from: &buf), 
+                time: FfiConverterInt64.read(from: &buf), 
+                format: FfiConverterInt32.read(from: &buf), 
+                sid: FfiConverterString.read(from: &buf), 
+                msg: FfiConverterString.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: DbFetchImModel, into buf: inout [UInt8]) {
+        FfiConverterInt64.write(value.autoId, into: &buf)
+        FfiConverterString.write(value.fromId, into: &buf)
+        FfiConverterString.write(value.toId, into: &buf)
+        FfiConverterInt64.write(value.time, into: &buf)
+        FfiConverterInt32.write(value.format, into: &buf)
+        FfiConverterString.write(value.sid, into: &buf)
+        FfiConverterString.write(value.msg, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeDBFetchIMModel_lift(_ buf: RustBuffer) throws -> DbFetchImModel {
+    return try FfiConverterTypeDBFetchIMModel.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeDBFetchIMModel_lower(_ value: DbFetchImModel) -> RustBuffer {
+    return FfiConverterTypeDBFetchIMModel.lower(value)
+}
+
+
 public struct DbInsertImModel {
     public var fromId: String
     public var toId: String

@@ -1,4 +1,4 @@
-use im::{self, DBInsertIMModel};
+use im::{self, DBChangestIMModel, DBFetchIMModel, DBInsertIMModel};
 use rand::Rng;
 use std::time::SystemTime;
 uniffi::setup_scaffolding!();
@@ -19,15 +19,12 @@ fn init_im(
 ) {
     // 回调函数
     let recv = move |msg: im::DBInsertIMModel| {
-        let msg_str = msg.to_json_string();
-        println!("xxx 收到消息 msg: {:?}", msg_str);
         call.receive_msg(msg);
     };
 
     // 调用 IM 库函数
     im::add_recv(recv).ok();
     im::im_init(&db_path, &id, &host, port as u16, &recv_topic).ok();
-    println!("xxxxxx初始化IM");
 }
 
 #[uniffi::export]
@@ -50,4 +47,34 @@ fn send_msg(from_id: String, to_id: String, send_topic: String, msg: String) {
         msg: msg.to_string(),
     };
     im::send_msg(&send_topic, msg).ok();
+}
+
+#[uniffi::export]
+fn delete_msg(im_sid: String) -> Result<(), String> {
+    im::delete_msg(im_sid).map_err(|err| err.to_string())?;
+    Ok(())
+}
+
+#[uniffi::export]
+fn update_msg(model: DBChangestIMModel) -> Result<(), String> {
+    im::update_msg(model).map_err(|err| err.to_string())?;
+    Ok(())
+}
+
+#[uniffi::export]
+fn fetch_latest_msgs(before_time: i64) -> Vec<DBFetchIMModel> {
+    if let Ok(records) = im::fetch_latest_msgs(before_time) {
+        records
+    } else {
+        vec![]
+    }
+}
+
+#[uniffi::export]
+fn fetch_latest_limit_msgs(before_time: i64, limit: i64) -> Vec<DBFetchIMModel> {
+    if let Ok(records) = im::fetch_latest_limit_msgs(before_time, limit) {
+        records
+    } else {
+        vec![]
+    }
 }

@@ -1,1 +1,1 @@
-/Users/wallerface/Desktop/IM_Client/uniffi-bindgen/out/imffiFFI.h
+../../uniffi-bindgen/out/imffiFFI.h

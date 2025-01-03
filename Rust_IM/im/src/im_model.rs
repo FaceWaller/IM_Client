@@ -1,14 +1,13 @@
-use super::schema::im_table;
+use database::diesel;
+// use database::diesel::{AsChangeset, Identifiable, Insertable, Queryable};
+use database::diesel::*;
+use database::schema::*;
 use serde;
 use serde::{Deserialize, Serialize};
 
-use diesel::{AsChangeset, Associations, Identifiable, Insertable, Queryable};
-
 #[allow(non_snake_case)]
-#[derive(Serialize, Default, PartialEq, Clone, Debug, Identifiable, Associations, Queryable)]
-#[table_name = "im_table"]
-#[primary_key(autoId)]
-
+#[derive(uniffi::Record, Serialize, Deserialize, Default, PartialEq, Clone, Debug, Queryable)]
+#[diesel(table_name = im_table)]
 pub struct DBFetchIMModel {
     pub(crate) autoId: i64,
     pub(crate) fromId: String,
@@ -20,18 +19,8 @@ pub struct DBFetchIMModel {
 }
 
 #[allow(non_snake_case)]
-#[derive(
-    uniffi::Record,
-    Serialize,
-    Deserialize,
-    Default,
-    PartialEq,
-    Clone,
-    Debug,
-    Associations,
-    Insertable,
-)]
-#[table_name = "im_table"]
+#[derive(uniffi::Record, Serialize, Deserialize, Default, PartialEq, Clone, Debug, Insertable)]
+#[diesel(table_name = im_table)]
 pub struct DBInsertIMModel {
     pub fromId: String,
     pub toId: String,
@@ -47,7 +36,7 @@ impl DBInsertIMModel {
     }
 }
 #[allow(non_snake_case)]
-#[derive(Default, PartialEq, Clone, Debug, Associations, AsChangeset)]
+#[derive(uniffi::Record, Serialize, Deserialize, Default, PartialEq, Clone, Debug, AsChangeset)]
 #[table_name = "im_table"]
 pub struct DBChangestIMModel {
     pub(crate) fromId: Option<String>,

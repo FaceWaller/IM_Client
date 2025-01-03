@@ -1,1 +1,1 @@
-/Users/wallerface/Desktop/IM_Client/uniffi-bindgen/out/im.swift
+../../uniffi-bindgen/out/im.swift
