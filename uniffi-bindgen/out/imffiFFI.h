@@ -296,11 +296,6 @@ void uniffi_imffi_fn_func_init_im(RustBuffer db_path, RustBuffer id, RustBuffer 
 void uniffi_imffi_fn_func_send_msg(RustBuffer from_id, RustBuffer to_id, RustBuffer send_topic, RustBuffer msg, RustCallStatus *_Nonnull out_status
 );
 #endif
-#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_UPDATE_MSG
-#define UNIFFI_FFIDEF_UNIFFI_IMFFI_FN_FUNC_UPDATE_MSG
-void uniffi_imffi_fn_func_update_msg(RustBuffer model, RustCallStatus *_Nonnull out_status
-);
-#endif
 #ifndef UNIFFI_FFIDEF_FFI_IMFFI_RUSTBUFFER_ALLOC
 #define UNIFFI_FFIDEF_FFI_IMFFI_RUSTBUFFER_ALLOC
 RustBuffer ffi_imffi_rustbuffer_alloc(uint64_t size, RustCallStatus *_Nonnull out_status
@@ -608,12 +603,6 @@ uint16_t uniffi_imffi_checksum_func_init_im(void
 #ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_SEND_MSG
 #define UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_SEND_MSG
 uint16_t uniffi_imffi_checksum_func_send_msg(void
-    
-);
-#endif
-#ifndef UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_UPDATE_MSG
-#define UNIFFI_FFIDEF_UNIFFI_IMFFI_CHECKSUM_FUNC_UPDATE_MSG
-uint16_t uniffi_imffi_checksum_func_update_msg(void
     
 );
 #endif

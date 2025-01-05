@@ -468,101 +468,8 @@ private struct FfiConverterString: FfiConverter {
     }
 }
 
-public struct DbChangestImModel {
-    public var fromId: String?
-    public var toId: String?
-    public var time: Int64?
-    public var format: Int32?
-    public var sid: String
-    public var msg: String?
-
-    // Default memberwise initializers are never public by default, so we
-    // declare one manually.
-    public init(fromId: String?, toId: String?, time: Int64?, format: Int32?, sid: String, msg: String?) {
-        self.fromId = fromId
-        self.toId = toId
-        self.time = time
-        self.format = format
-        self.sid = sid
-        self.msg = msg
-    }
-}
-
-extension DbChangestImModel: Equatable, Hashable {
-    public static func == (lhs: DbChangestImModel, rhs: DbChangestImModel) -> Bool {
-        if lhs.fromId != rhs.fromId {
-            return false
-        }
-        if lhs.toId != rhs.toId {
-            return false
-        }
-        if lhs.time != rhs.time {
-            return false
-        }
-        if lhs.format != rhs.format {
-            return false
-        }
-        if lhs.sid != rhs.sid {
-            return false
-        }
-        if lhs.msg != rhs.msg {
-            return false
-        }
-        return true
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(fromId)
-        hasher.combine(toId)
-        hasher.combine(time)
-        hasher.combine(format)
-        hasher.combine(sid)
-        hasher.combine(msg)
-    }
-}
-
-#if swift(>=5.8)
-    @_documentation(visibility: private)
-#endif
-public struct FfiConverterTypeDBChangestIMModel: FfiConverterRustBuffer {
-    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> DbChangestImModel {
-        return
-            try DbChangestImModel(
-                fromId: FfiConverterOptionString.read(from: &buf),
-                toId: FfiConverterOptionString.read(from: &buf),
-                time: FfiConverterOptionInt64.read(from: &buf),
-                format: FfiConverterOptionInt32.read(from: &buf),
-                sid: FfiConverterString.read(from: &buf),
-                msg: FfiConverterOptionString.read(from: &buf)
-            )
-    }
-
-    public static func write(_ value: DbChangestImModel, into buf: inout [UInt8]) {
-        FfiConverterOptionString.write(value.fromId, into: &buf)
-        FfiConverterOptionString.write(value.toId, into: &buf)
-        FfiConverterOptionInt64.write(value.time, into: &buf)
-        FfiConverterOptionInt32.write(value.format, into: &buf)
-        FfiConverterString.write(value.sid, into: &buf)
-        FfiConverterOptionString.write(value.msg, into: &buf)
-    }
-}
-
-#if swift(>=5.8)
-    @_documentation(visibility: private)
-#endif
-public func FfiConverterTypeDBChangestIMModel_lift(_ buf: RustBuffer) throws -> DbChangestImModel {
-    return try FfiConverterTypeDBChangestIMModel.lift(buf)
-}
-
-#if swift(>=5.8)
-    @_documentation(visibility: private)
-#endif
-public func FfiConverterTypeDBChangestIMModel_lower(_ value: DbChangestImModel) -> RustBuffer {
-    return FfiConverterTypeDBChangestIMModel.lower(value)
-}
-
-public struct DbFetchImModel {
-    public var autoId: Int64
+public struct ImModel {
+    public var autoId: Int64?
     public var fromId: String
     public var toId: String
     public var time: Int64
@@ -572,7 +479,7 @@ public struct DbFetchImModel {
 
     // Default memberwise initializers are never public by default, so we
     // declare one manually.
-    public init(autoId: Int64, fromId: String, toId: String, time: Int64, format: Int32, sid: String, msg: String) {
+    public init(autoId: Int64?, fromId: String, toId: String, time: Int64, format: Int32, sid: String, msg: String) {
         self.autoId = autoId
         self.fromId = fromId
         self.toId = toId
@@ -583,8 +490,8 @@ public struct DbFetchImModel {
     }
 }
 
-extension DbFetchImModel: Equatable, Hashable {
-    public static func == (lhs: DbFetchImModel, rhs: DbFetchImModel) -> Bool {
+extension ImModel: Equatable, Hashable {
+    public static func == (lhs: ImModel, rhs: ImModel) -> Bool {
         if lhs.autoId != rhs.autoId {
             return false
         }
@@ -623,11 +530,11 @@ extension DbFetchImModel: Equatable, Hashable {
 #if swift(>=5.8)
     @_documentation(visibility: private)
 #endif
-public struct FfiConverterTypeDBFetchIMModel: FfiConverterRustBuffer {
-    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> DbFetchImModel {
+public struct FfiConverterTypeIMModel: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> ImModel {
         return
-            try DbFetchImModel(
-                autoId: FfiConverterInt64.read(from: &buf),
+            try ImModel(
+                autoId: FfiConverterOptionInt64.read(from: &buf),
                 fromId: FfiConverterString.read(from: &buf),
                 toId: FfiConverterString.read(from: &buf),
                 time: FfiConverterInt64.read(from: &buf),
@@ -637,8 +544,8 @@ public struct FfiConverterTypeDBFetchIMModel: FfiConverterRustBuffer {
             )
     }
 
-    public static func write(_ value: DbFetchImModel, into buf: inout [UInt8]) {
-        FfiConverterInt64.write(value.autoId, into: &buf)
+    public static func write(_ value: ImModel, into buf: inout [UInt8]) {
+        FfiConverterOptionInt64.write(value.autoId, into: &buf)
         FfiConverterString.write(value.fromId, into: &buf)
         FfiConverterString.write(value.toId, into: &buf)
         FfiConverterInt64.write(value.time, into: &buf)
@@ -651,132 +558,15 @@ public struct FfiConverterTypeDBFetchIMModel: FfiConverterRustBuffer {
 #if swift(>=5.8)
     @_documentation(visibility: private)
 #endif
-public func FfiConverterTypeDBFetchIMModel_lift(_ buf: RustBuffer) throws -> DbFetchImModel {
-    return try FfiConverterTypeDBFetchIMModel.lift(buf)
+public func FfiConverterTypeIMModel_lift(_ buf: RustBuffer) throws -> ImModel {
+    return try FfiConverterTypeIMModel.lift(buf)
 }
 
 #if swift(>=5.8)
     @_documentation(visibility: private)
 #endif
-public func FfiConverterTypeDBFetchIMModel_lower(_ value: DbFetchImModel) -> RustBuffer {
-    return FfiConverterTypeDBFetchIMModel.lower(value)
-}
-
-public struct DbInsertImModel {
-    public var fromId: String
-    public var toId: String
-    public var time: Int64
-    public var format: Int32
-    public var sid: String
-    public var msg: String
-
-    // Default memberwise initializers are never public by default, so we
-    // declare one manually.
-    public init(fromId: String, toId: String, time: Int64, format: Int32, sid: String, msg: String) {
-        self.fromId = fromId
-        self.toId = toId
-        self.time = time
-        self.format = format
-        self.sid = sid
-        self.msg = msg
-    }
-}
-
-extension DbInsertImModel: Equatable, Hashable {
-    public static func == (lhs: DbInsertImModel, rhs: DbInsertImModel) -> Bool {
-        if lhs.fromId != rhs.fromId {
-            return false
-        }
-        if lhs.toId != rhs.toId {
-            return false
-        }
-        if lhs.time != rhs.time {
-            return false
-        }
-        if lhs.format != rhs.format {
-            return false
-        }
-        if lhs.sid != rhs.sid {
-            return false
-        }
-        if lhs.msg != rhs.msg {
-            return false
-        }
-        return true
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(fromId)
-        hasher.combine(toId)
-        hasher.combine(time)
-        hasher.combine(format)
-        hasher.combine(sid)
-        hasher.combine(msg)
-    }
-}
-
-#if swift(>=5.8)
-    @_documentation(visibility: private)
-#endif
-public struct FfiConverterTypeDBInsertIMModel: FfiConverterRustBuffer {
-    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> DbInsertImModel {
-        return
-            try DbInsertImModel(
-                fromId: FfiConverterString.read(from: &buf),
-                toId: FfiConverterString.read(from: &buf),
-                time: FfiConverterInt64.read(from: &buf),
-                format: FfiConverterInt32.read(from: &buf),
-                sid: FfiConverterString.read(from: &buf),
-                msg: FfiConverterString.read(from: &buf)
-            )
-    }
-
-    public static func write(_ value: DbInsertImModel, into buf: inout [UInt8]) {
-        FfiConverterString.write(value.fromId, into: &buf)
-        FfiConverterString.write(value.toId, into: &buf)
-        FfiConverterInt64.write(value.time, into: &buf)
-        FfiConverterInt32.write(value.format, into: &buf)
-        FfiConverterString.write(value.sid, into: &buf)
-        FfiConverterString.write(value.msg, into: &buf)
-    }
-}
-
-#if swift(>=5.8)
-    @_documentation(visibility: private)
-#endif
-public func FfiConverterTypeDBInsertIMModel_lift(_ buf: RustBuffer) throws -> DbInsertImModel {
-    return try FfiConverterTypeDBInsertIMModel.lift(buf)
-}
-
-#if swift(>=5.8)
-    @_documentation(visibility: private)
-#endif
-public func FfiConverterTypeDBInsertIMModel_lower(_ value: DbInsertImModel) -> RustBuffer {
-    return FfiConverterTypeDBInsertIMModel.lower(value)
-}
-
-#if swift(>=5.8)
-    @_documentation(visibility: private)
-#endif
-private struct FfiConverterOptionInt32: FfiConverterRustBuffer {
-    typealias SwiftType = Int32?
-
-    public static func write(_ value: SwiftType, into buf: inout [UInt8]) {
-        guard let value = value else {
-            writeInt(&buf, Int8(0))
-            return
-        }
-        writeInt(&buf, Int8(1))
-        FfiConverterInt32.write(value, into: &buf)
-    }
-
-    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> SwiftType {
-        switch try readInt(&buf) as Int8 {
-        case 0: return nil
-        case 1: return try FfiConverterInt32.read(from: &buf)
-        default: throw UniffiInternalError.unexpectedOptionalTag
-        }
-    }
+public func FfiConverterTypeIMModel_lower(_ value: ImModel) -> RustBuffer {
+    return FfiConverterTypeIMModel.lower(value)
 }
 
 #if swift(>=5.8)
@@ -798,30 +588,6 @@ private struct FfiConverterOptionInt64: FfiConverterRustBuffer {
         switch try readInt(&buf) as Int8 {
         case 0: return nil
         case 1: return try FfiConverterInt64.read(from: &buf)
-        default: throw UniffiInternalError.unexpectedOptionalTag
-        }
-    }
-}
-
-#if swift(>=5.8)
-    @_documentation(visibility: private)
-#endif
-private struct FfiConverterOptionString: FfiConverterRustBuffer {
-    typealias SwiftType = String?
-
-    public static func write(_ value: SwiftType, into buf: inout [UInt8]) {
-        guard let value = value else {
-            writeInt(&buf, Int8(0))
-            return
-        }
-        writeInt(&buf, Int8(1))
-        FfiConverterString.write(value, into: &buf)
-    }
-
-    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> SwiftType {
-        switch try readInt(&buf) as Int8 {
-        case 0: return nil
-        case 1: return try FfiConverterString.read(from: &buf)
         default: throw UniffiInternalError.unexpectedOptionalTag
         }
     }

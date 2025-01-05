@@ -7,32 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1EA9D39B2D26CA2F0039FDF9 /* im.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA9D3982D26CA2F0039FDF9 /* im.swift */; };
-		1EF20EBB2D216C110041E866 /* imffi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF20EBA2D216C110041E866 /* imffi.swift */; };
+		1E50C47A2D292A65002102D1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1E50C4792D292A65002102D1 /* SnapKit */; };
+		1E50C48D2D297D0B002102D1 /* CustomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4862D297D0B002102D1 /* CustomExtension.swift */; };
+		1E50C48E2D297D0B002102D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4842D297D0B002102D1 /* ViewController.swift */; };
+		1E50C48F2D297D0B002102D1 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C48B2D297D0B002102D1 /* ToolBar.swift */; };
+		1E50C4902D297D0B002102D1 /* ModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4872D297D0B002102D1 /* ModelExtension.swift */; };
+		1E50C4912D297D0B002102D1 /* CustomIMTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C48A2D297D0B002102D1 /* CustomIMTableViewCell.swift */; };
+		1E50C4992D297D7A002102D1 /* imffi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4942D297D7A002102D1 /* imffi.swift */; };
+		1E50C49A2D297D7A002102D1 /* im.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4932D297D7A002102D1 /* im.swift */; };
+		1E50C49B2D297D7A002102D1 /* libimffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E50C4972D297D7A002102D1 /* libimffi.a */; };
+		1E50C49E2D297E6C002102D1 /* IMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C49C2D297E6C002102D1 /* IMConfig.swift */; };
+		1E50C4A12D2986FB002102D1 /* IMDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4A02D2986FB002102D1 /* IMDataSource.swift */; };
 		E73BD1F12C4687C400363513 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73BD1F02C4687C400363513 /* AppDelegate.swift */; };
 		E73BD1F32C4687C400363513 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73BD1F22C4687C400363513 /* SceneDelegate.swift */; };
-		E73BD1F52C4687C400363513 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73BD1F42C4687C400363513 /* ViewController.swift */; };
 		E73BD1F82C4687C400363513 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = E73BD1F72C4687C400363513 /* Base */; };
 		E73BD1FA2C4687C400363513 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E73BD1F92C4687C400363513 /* Assets.xcassets */; };
 		E73BD1FD2C4687C400363513 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = E73BD1FC2C4687C400363513 /* Base */; };
-		E73BD2252C468A6A00363513 /* libimffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BD2242C468A6A00363513 /* libimffi.a */; };
 		E73BD22E2C468BBC00363513 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BD22D2C468BBC00363513 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1EA9D3982D26CA2F0039FDF9 /* im.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = im.swift; sourceTree = "<group>"; };
-		1EA9D39C2D26CB060039FDF9 /* imFFI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imFFI.h; sourceTree = "<group>"; };
-		1EA9D39D2D26CB060039FDF9 /* imffiFFI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imffiFFI.h; sourceTree = "<group>"; };
-		1EF20EBA2D216C110041E866 /* imffi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imffi.swift; sourceTree = "<group>"; };
+		1E50C4842D297D0B002102D1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1E50C4862D297D0B002102D1 /* CustomExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtension.swift; sourceTree = "<group>"; };
+		1E50C4872D297D0B002102D1 /* ModelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelExtension.swift; sourceTree = "<group>"; };
+		1E50C48A2D297D0B002102D1 /* CustomIMTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIMTableViewCell.swift; sourceTree = "<group>"; };
+		1E50C48B2D297D0B002102D1 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
+		1E50C4932D297D7A002102D1 /* im.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = im.swift; sourceTree = "<group>"; };
+		1E50C4942D297D7A002102D1 /* imffi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imffi.swift; sourceTree = "<group>"; };
+		1E50C4952D297D7A002102D1 /* imFFI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imFFI.h; sourceTree = "<group>"; };
+		1E50C4962D297D7A002102D1 /* imffiFFI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imffiFFI.h; sourceTree = "<group>"; };
+		1E50C4972D297D7A002102D1 /* libimffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libimffi.a; sourceTree = "<group>"; };
+		1E50C49C2D297E6C002102D1 /* IMConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMConfig.swift; sourceTree = "<group>"; };
+		1E50C4A02D2986FB002102D1 /* IMDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDataSource.swift; sourceTree = "<group>"; };
 		E73BD1ED2C4687C400363513 /* SwiftIMGuest1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftIMGuest1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E73BD1F02C4687C400363513 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E73BD1F22C4687C400363513 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E73BD1F42C4687C400363513 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E73BD1F72C4687C400363513 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E73BD1F92C4687C400363513 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E73BD1FC2C4687C400363513 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E73BD1FE2C4687C400363513 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E73BD2242C468A6A00363513 /* libimffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libimffi.a; sourceTree = "<group>"; };
 		E73BD2282C468B5700363513 /* SwiftIMGuest1-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftIMGuest1-Bridging-Header.h"; sourceTree = "<group>"; };
 		E73BD22D2C468BBC00363513 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -42,14 +55,69 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E50C47A2D292A65002102D1 /* SnapKit in Frameworks */,
+				1E50C49B2D297D7A002102D1 /* libimffi.a in Frameworks */,
 				E73BD22E2C468BBC00363513 /* libsqlite3.tbd in Frameworks */,
-				E73BD2252C468A6A00363513 /* libimffi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E50C4852D297D0B002102D1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1E50C4842D297D0B002102D1 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1E50C4882D297D0B002102D1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1E50C4862D297D0B002102D1 /* CustomExtension.swift */,
+				1E50C4872D297D0B002102D1 /* ModelExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		1E50C48C2D297D0B002102D1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1E50C48A2D297D0B002102D1 /* CustomIMTableViewCell.swift */,
+				1E50C48B2D297D0B002102D1 /* ToolBar.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1E50C4982D297D7A002102D1 /* FFI */ = {
+			isa = PBXGroup;
+			children = (
+				1E50C4932D297D7A002102D1 /* im.swift */,
+				1E50C4942D297D7A002102D1 /* imffi.swift */,
+				1E50C4952D297D7A002102D1 /* imFFI.h */,
+				1E50C4962D297D7A002102D1 /* imffiFFI.h */,
+				1E50C4972D297D7A002102D1 /* libimffi.a */,
+			);
+			path = FFI;
+			sourceTree = "<group>";
+		};
+		1E50C49D2D297E6C002102D1 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				1E50C49C2D297E6C002102D1 /* IMConfig.swift */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		1E50C49F2D2986ED002102D1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1E50C4A02D2986FB002102D1 /* IMDataSource.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E73BD1E42C4687C300363513 = {
 			isa = PBXGroup;
 			children = (
@@ -70,14 +138,14 @@
 		E73BD1EF2C4687C400363513 /* SwiftIMGuest1 */ = {
 			isa = PBXGroup;
 			children = (
-				E73BD2242C468A6A00363513 /* libimffi.a */,
-				1EA9D39C2D26CB060039FDF9 /* imFFI.h */,
-				1EA9D39D2D26CB060039FDF9 /* imffiFFI.h */,
-				1EA9D3982D26CA2F0039FDF9 /* im.swift */,
-				1EF20EBA2D216C110041E866 /* imffi.swift */,
 				E73BD1F02C4687C400363513 /* AppDelegate.swift */,
 				E73BD1F22C4687C400363513 /* SceneDelegate.swift */,
-				E73BD1F42C4687C400363513 /* ViewController.swift */,
+				1E50C49F2D2986ED002102D1 /* Model */,
+				1E50C49D2D297E6C002102D1 /* config */,
+				1E50C4982D297D7A002102D1 /* FFI */,
+				1E50C4852D297D0B002102D1 /* Controller */,
+				1E50C4882D297D0B002102D1 /* Extension */,
+				1E50C48C2D297D0B002102D1 /* View */,
 				E73BD1F62C4687C400363513 /* Main.storyboard */,
 				E73BD1F92C4687C400363513 /* Assets.xcassets */,
 				E73BD1FB2C4687C400363513 /* LaunchScreen.storyboard */,
@@ -140,6 +208,9 @@
 				Base,
 			);
 			mainGroup = E73BD1E42C4687C300363513;
+			packageReferences = (
+				1E50C4782D292A65002102D1 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = E73BD1EE2C4687C400363513 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -167,10 +238,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E73BD1F52C4687C400363513 /* ViewController.swift in Sources */,
-				1EF20EBB2D216C110041E866 /* imffi.swift in Sources */,
 				E73BD1F12C4687C400363513 /* AppDelegate.swift in Sources */,
-				1EA9D39B2D26CA2F0039FDF9 /* im.swift in Sources */,
+				1E50C48D2D297D0B002102D1 /* CustomExtension.swift in Sources */,
+				1E50C4992D297D7A002102D1 /* imffi.swift in Sources */,
+				1E50C49E2D297E6C002102D1 /* IMConfig.swift in Sources */,
+				1E50C4A12D2986FB002102D1 /* IMDataSource.swift in Sources */,
+				1E50C49A2D297D7A002102D1 /* im.swift in Sources */,
+				1E50C48E2D297D0B002102D1 /* ViewController.swift in Sources */,
+				1E50C48F2D297D0B002102D1 /* ToolBar.swift in Sources */,
+				1E50C4902D297D0B002102D1 /* ModelExtension.swift in Sources */,
+				1E50C4912D297D0B002102D1 /* CustomIMTableViewCell.swift in Sources */,
 				E73BD1F32C4687C400363513 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +416,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SwiftIMGuest1",
+					"$(PROJECT_DIR)/SwiftIMGuest1/FFI",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = macjpz.SwiftIMGuest1;
@@ -374,6 +452,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SwiftIMGuest1",
+					"$(PROJECT_DIR)/SwiftIMGuest1/FFI",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = macjpz.SwiftIMGuest1;
@@ -407,6 +486,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1E50C4782D292A65002102D1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1E50C4792D292A65002102D1 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E50C4782D292A65002102D1 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E73BD1E52C4687C300363513 /* Project object */;
 }

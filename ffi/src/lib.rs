@@ -13,7 +13,7 @@ pub enum UniffiError {
 
 #[uniffi::export(callback_interface)]
 pub trait MsgCall: Sync + Send {
-    fn receive_msg(&self, record: DBInsertIMModel);
+    fn receive_msg(&self, record: IMModel);
 }
 
 #[uniffi::export]
@@ -27,7 +27,7 @@ fn init_im(
 ) {
     // 回调函数
     let recv = move |msg: im::DBInsertIMModel| {
-        call.receive_msg(msg);
+        call.receive_msg(msg.into());
     };
 
     // 调用 IM 库函数
@@ -63,25 +63,25 @@ fn delete_msg(im_sid: String) -> Result<(), UniffiError> {
     Ok(())
 }
 
-#[uniffi::export]
-fn update_msg(model: DBChangestIMModel) -> Result<(), UniffiError> {
-    im::update_msg(model).map_err(|err| UniffiError::IMError(err.to_string()))?;
-    Ok(())
-}
+// #[uniffi::export]
+// fn update_msg(model: DBChangestIMModel) -> Result<(), UniffiError> {
+//     im::update_msg(model).map_err(|err| UniffiError::IMError(err.to_string()))?;
+//     Ok(())
+// }
 
 #[uniffi::export]
-fn fetch_latest_msgs(before_time: i64) -> Vec<DBFetchIMModel> {
+fn fetch_latest_msgs(before_time: i64) -> Vec<IMModel> {
     if let Ok(records) = im::fetch_latest_msgs(before_time) {
-        records
+        records.into_iter().map(|record| record.into()).collect()
     } else {
         vec![]
     }
 }
 
 #[uniffi::export]
-fn fetch_latest_limit_msgs(before_time: i64, limit: i64) -> Vec<DBFetchIMModel> {
+fn fetch_latest_limit_msgs(before_time: i64, limit: i64) -> Vec<IMModel> {
     if let Ok(records) = im::fetch_latest_limit_msgs(before_time, limit) {
-        records
+        records.into_iter().map(|record| record.into()).collect()
     } else {
         vec![]
     }

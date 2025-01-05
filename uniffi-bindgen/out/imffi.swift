@@ -514,7 +514,7 @@ extension UniffiError: Foundation.LocalizedError {
 }
 
 public protocol MsgCall: AnyObject {
-    func receiveMsg(record: DbInsertImModel)
+    func receiveMsg(record: ImModel)
 }
 
 // Magic number for the Rust proxy to call using the same mechanism as every other method,
@@ -542,7 +542,7 @@ private enum UniffiCallbackInterfaceMsgCall {
                     throw UniffiInternalError.unexpectedStaleHandle
                 }
                 return try uniffiObj.receiveMsg(
-                    record: FfiConverterTypeDBInsertIMModel_lift(record)
+                    record: FfiConverterTypeIMModel_lift(record)
                 )
             }
 
@@ -614,23 +614,23 @@ extension FfiConverterCallbackInterfaceMsgCall: FfiConverter {
 #if swift(>=5.8)
     @_documentation(visibility: private)
 #endif
-private struct FfiConverterSequenceTypeDBFetchIMModel: FfiConverterRustBuffer {
-    typealias SwiftType = [DbFetchImModel]
+private struct FfiConverterSequenceTypeIMModel: FfiConverterRustBuffer {
+    typealias SwiftType = [ImModel]
 
-    public static func write(_ value: [DbFetchImModel], into buf: inout [UInt8]) {
+    public static func write(_ value: [ImModel], into buf: inout [UInt8]) {
         let len = Int32(value.count)
         writeInt(&buf, len)
         for item in value {
-            FfiConverterTypeDBFetchIMModel.write(item, into: &buf)
+            FfiConverterTypeIMModel.write(item, into: &buf)
         }
     }
 
-    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> [DbFetchImModel] {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> [ImModel] {
         let len: Int32 = try readInt(&buf)
-        var seq = [DbFetchImModel]()
+        var seq = [ImModel]()
         seq.reserveCapacity(Int(len))
         for _ in 0 ..< len {
-            try seq.append(FfiConverterTypeDBFetchIMModel.read(from: &buf))
+            try seq.append(FfiConverterTypeIMModel.read(from: &buf))
         }
         return seq
     }
@@ -643,8 +643,8 @@ public func deleteMsg(imSid: String) throws { try rustCallWithError(FfiConverter
 }
 }
 
-public func fetchLatestLimitMsgs(beforeTime: Int64, limit: Int64) -> [DbFetchImModel] {
-    return try! FfiConverterSequenceTypeDBFetchIMModel.lift(try! rustCall {
+public func fetchLatestLimitMsgs(beforeTime: Int64, limit: Int64) -> [ImModel] {
+    return try! FfiConverterSequenceTypeIMModel.lift(try! rustCall {
         uniffi_imffi_fn_func_fetch_latest_limit_msgs(
             FfiConverterInt64.lower(beforeTime),
             FfiConverterInt64.lower(limit), $0
@@ -652,8 +652,8 @@ public func fetchLatestLimitMsgs(beforeTime: Int64, limit: Int64) -> [DbFetchImM
     })
 }
 
-public func fetchLatestMsgs(beforeTime: Int64) -> [DbFetchImModel] {
-    return try! FfiConverterSequenceTypeDBFetchIMModel.lift(try! rustCall {
+public func fetchLatestMsgs(beforeTime: Int64) -> [ImModel] {
+    return try! FfiConverterSequenceTypeIMModel.lift(try! rustCall {
         uniffi_imffi_fn_func_fetch_latest_msgs(
             FfiConverterInt64.lower(beforeTime), $0
         )
@@ -682,13 +682,6 @@ public func sendMsg(fromId: String, toId: String, sendTopic: String, msg: String
 }
 }
 
-public func updateMsg(model: DbChangestImModel) throws { try rustCallWithError(FfiConverterTypeUniffiError.lift) {
-    uniffi_imffi_fn_func_update_msg(
-        FfiConverterTypeDBChangestIMModel_lower(model), $0
-    )
-}
-}
-
 private enum InitializationResult {
     case ok
     case contractVersionMismatch
@@ -708,10 +701,10 @@ private var initializationResult: InitializationResult = {
     if uniffi_imffi_checksum_func_delete_msg() != 5431 {
         return InitializationResult.apiChecksumMismatch
     }
-    if uniffi_imffi_checksum_func_fetch_latest_limit_msgs() != 860 {
+    if uniffi_imffi_checksum_func_fetch_latest_limit_msgs() != 36566 {
         return InitializationResult.apiChecksumMismatch
     }
-    if uniffi_imffi_checksum_func_fetch_latest_msgs() != 39385 {
+    if uniffi_imffi_checksum_func_fetch_latest_msgs() != 27817 {
         return InitializationResult.apiChecksumMismatch
     }
     if uniffi_imffi_checksum_func_init_im() != 52314 {
@@ -720,10 +713,7 @@ private var initializationResult: InitializationResult = {
     if uniffi_imffi_checksum_func_send_msg() != 26112 {
         return InitializationResult.apiChecksumMismatch
     }
-    if uniffi_imffi_checksum_func_update_msg() != 47689 {
-        return InitializationResult.apiChecksumMismatch
-    }
-    if uniffi_imffi_checksum_method_msgcall_receive_msg() != 25201 {
+    if uniffi_imffi_checksum_method_msgcall_receive_msg() != 42973 {
         return InitializationResult.apiChecksumMismatch
     }
 

@@ -6,5 +6,5 @@ mod im_mqtt;
 
 pub use im_db::*;
 pub use im_manager::{add_recv, im_init, send_msg};
-pub use im_model::{DBChangestIMModel, DBFetchIMModel, DBInsertIMModel};
+pub use im_model::*;
 uniffi::setup_scaffolding!();
