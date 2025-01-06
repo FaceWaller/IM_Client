@@ -59,10 +59,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(CustomIMTableViewCell.self, forCellReuseIdentifier: "CustomIMTableViewCell")
+        tableView.register(IMSendCell.self, forCellReuseIdentifier: String(describing: IMSendCell.self))
+        tableView.register(IMRecvCell.self, forCellReuseIdentifier: String(describing: IMRecvCell.self))
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: ToolBarHeight + UIDevice.xx_safeDistanceBottom(), right: 0)
         self.view.addSubview(toolbar)
-
+        
         tableView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalTo(self.view);
         };
@@ -105,15 +106,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
+        let msg_data = data.item(at: indexPath.row)
+        return msg_data?.cellHeight() ?? 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomIMTableViewCell", for: indexPath) as? CustomIMTableViewCell else {
-            return UITableViewCell()
-        }
         let msg_data = data.item(at: indexPath.row)
-        cell.updateMsgData(msgData:msg_data!, self_id: self_id)
+        let cls = msg_data?.getCellClass();
+        let reuseIdentifier = String(describing: cls) // 使用类名作为 reuseIdentifier
+        let cell: IMBasicCell
+        if let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) {
+            cell = dequeuedCell as! IMBasicCell
+        } else {
+            guard let cellType = cls else {
+                fatalError("`\(String(describing: cls))` is not a subclass of UITableViewCell")
+            }
+            cell = cellType.init(style: .default, reuseIdentifier: reuseIdentifier)
+        }
+        if let record = msg_data {
+            cell.setupRecord(record: record)
+        }
         return cell
     }
     
@@ -132,15 +144,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    private func addMsg(msgData: ImModel) {
-        data.addRecord(record: msgData)
+    private func addMsg(record: ImModel) {
+        data.addRecord(record: record)
     }
-    private func addMsgs(msgsData: [ImModel]) {
-        data.addRecords(records: msgsData)
-       
+    private func addMsgs(records: [ImModel]) {
+        data.addRecords(records: records)
+        
     }
     func receiveMsg(record: ImModel) {
-        self.addMsg(msgData: record)
+        self.addMsg(record: record)
         DispatchQueue.main.async {
             self.scrollToBottom(animated: true)
         }

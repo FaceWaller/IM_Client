@@ -12,12 +12,16 @@
 		1E50C48E2D297D0B002102D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4842D297D0B002102D1 /* ViewController.swift */; };
 		1E50C48F2D297D0B002102D1 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C48B2D297D0B002102D1 /* ToolBar.swift */; };
 		1E50C4902D297D0B002102D1 /* ModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4872D297D0B002102D1 /* ModelExtension.swift */; };
-		1E50C4912D297D0B002102D1 /* CustomIMTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C48A2D297D0B002102D1 /* CustomIMTableViewCell.swift */; };
 		1E50C4992D297D7A002102D1 /* imffi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4942D297D7A002102D1 /* imffi.swift */; };
 		1E50C49A2D297D7A002102D1 /* im.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4932D297D7A002102D1 /* im.swift */; };
 		1E50C49B2D297D7A002102D1 /* libimffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E50C4972D297D7A002102D1 /* libimffi.a */; };
 		1E50C49E2D297E6C002102D1 /* IMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C49C2D297E6C002102D1 /* IMConfig.swift */; };
 		1E50C4A12D2986FB002102D1 /* IMDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50C4A02D2986FB002102D1 /* IMDataSource.swift */; };
+		1E50CF042D2ADEA1002102D1 /* IMSendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50CF032D2ADEA1002102D1 /* IMSendCell.swift */; };
+		1E50CF062D2ADF46002102D1 /* IMRecvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50CF052D2ADF46002102D1 /* IMRecvCell.swift */; };
+		1E50CF082D2AE9BE002102D1 /* IMBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50CF072D2AE9BE002102D1 /* IMBasicCell.swift */; };
+		1E50D94C2D2AEC84002102D1 /* IMFormatBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50D94B2D2AEC84002102D1 /* IMFormatBaseView.swift */; };
+		1E50D94E2D2AF30F002102D1 /* IMFormatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E50D94D2D2AF30F002102D1 /* IMFormatTextView.swift */; };
 		E73BD1F12C4687C400363513 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73BD1F02C4687C400363513 /* AppDelegate.swift */; };
 		E73BD1F32C4687C400363513 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73BD1F22C4687C400363513 /* SceneDelegate.swift */; };
 		E73BD1F82C4687C400363513 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = E73BD1F72C4687C400363513 /* Base */; };
@@ -30,7 +34,6 @@
 		1E50C4842D297D0B002102D1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1E50C4862D297D0B002102D1 /* CustomExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtension.swift; sourceTree = "<group>"; };
 		1E50C4872D297D0B002102D1 /* ModelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelExtension.swift; sourceTree = "<group>"; };
-		1E50C48A2D297D0B002102D1 /* CustomIMTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIMTableViewCell.swift; sourceTree = "<group>"; };
 		1E50C48B2D297D0B002102D1 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		1E50C4932D297D7A002102D1 /* im.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = im.swift; sourceTree = "<group>"; };
 		1E50C4942D297D7A002102D1 /* imffi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imffi.swift; sourceTree = "<group>"; };
@@ -39,6 +42,11 @@
 		1E50C4972D297D7A002102D1 /* libimffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libimffi.a; sourceTree = "<group>"; };
 		1E50C49C2D297E6C002102D1 /* IMConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMConfig.swift; sourceTree = "<group>"; };
 		1E50C4A02D2986FB002102D1 /* IMDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDataSource.swift; sourceTree = "<group>"; };
+		1E50CF032D2ADEA1002102D1 /* IMSendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSendCell.swift; sourceTree = "<group>"; };
+		1E50CF052D2ADF46002102D1 /* IMRecvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMRecvCell.swift; sourceTree = "<group>"; };
+		1E50CF072D2AE9BE002102D1 /* IMBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMBasicCell.swift; sourceTree = "<group>"; };
+		1E50D94B2D2AEC84002102D1 /* IMFormatBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMFormatBaseView.swift; sourceTree = "<group>"; };
+		1E50D94D2D2AF30F002102D1 /* IMFormatTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMFormatTextView.swift; sourceTree = "<group>"; };
 		E73BD1ED2C4687C400363513 /* SwiftIMGuest1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftIMGuest1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E73BD1F02C4687C400363513 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E73BD1F22C4687C400363513 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +92,11 @@
 		1E50C48C2D297D0B002102D1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1E50C48A2D297D0B002102D1 /* CustomIMTableViewCell.swift */,
+				1E50CF032D2ADEA1002102D1 /* IMSendCell.swift */,
+				1E50CF052D2ADF46002102D1 /* IMRecvCell.swift */,
+				1E50CF072D2AE9BE002102D1 /* IMBasicCell.swift */,
+				1E50D94B2D2AEC84002102D1 /* IMFormatBaseView.swift */,
+				1E50D94D2D2AF30F002102D1 /* IMFormatTextView.swift */,
 				1E50C48B2D297D0B002102D1 /* ToolBar.swift */,
 			);
 			path = View;
@@ -140,11 +152,11 @@
 			children = (
 				E73BD1F02C4687C400363513 /* AppDelegate.swift */,
 				E73BD1F22C4687C400363513 /* SceneDelegate.swift */,
-				1E50C49F2D2986ED002102D1 /* Model */,
 				1E50C49D2D297E6C002102D1 /* config */,
-				1E50C4982D297D7A002102D1 /* FFI */,
-				1E50C4852D297D0B002102D1 /* Controller */,
 				1E50C4882D297D0B002102D1 /* Extension */,
+				1E50C4982D297D7A002102D1 /* FFI */,
+				1E50C49F2D2986ED002102D1 /* Model */,
+				1E50C4852D297D0B002102D1 /* Controller */,
 				1E50C48C2D297D0B002102D1 /* View */,
 				E73BD1F62C4687C400363513 /* Main.storyboard */,
 				E73BD1F92C4687C400363513 /* Assets.xcassets */,
@@ -240,14 +252,18 @@
 			files = (
 				E73BD1F12C4687C400363513 /* AppDelegate.swift in Sources */,
 				1E50C48D2D297D0B002102D1 /* CustomExtension.swift in Sources */,
+				1E50CF082D2AE9BE002102D1 /* IMBasicCell.swift in Sources */,
 				1E50C4992D297D7A002102D1 /* imffi.swift in Sources */,
 				1E50C49E2D297E6C002102D1 /* IMConfig.swift in Sources */,
 				1E50C4A12D2986FB002102D1 /* IMDataSource.swift in Sources */,
+				1E50D94E2D2AF30F002102D1 /* IMFormatTextView.swift in Sources */,
 				1E50C49A2D297D7A002102D1 /* im.swift in Sources */,
 				1E50C48E2D297D0B002102D1 /* ViewController.swift in Sources */,
+				1E50CF042D2ADEA1002102D1 /* IMSendCell.swift in Sources */,
 				1E50C48F2D297D0B002102D1 /* ToolBar.swift in Sources */,
+				1E50CF062D2ADF46002102D1 /* IMRecvCell.swift in Sources */,
 				1E50C4902D297D0B002102D1 /* ModelExtension.swift in Sources */,
-				1E50C4912D297D0B002102D1 /* CustomIMTableViewCell.swift in Sources */,
+				1E50D94C2D2AEC84002102D1 /* IMFormatBaseView.swift in Sources */,
 				E73BD1F32C4687C400363513 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
